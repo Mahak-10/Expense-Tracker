@@ -1,0 +1,1184 @@
+{
+	"info": {
+		"_postman_id": "738b0964-741a-413b-8faf-cb2bcf0f6541",
+		"name": "Expense Tracker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "46882790",
+		"_collection_link": "https://mahaksingh-9043745.postman.co/workspace/Mahak-Singh's-Workspace~5a2951f9-0ce9-43b5-825f-030bed8567a0/collection/46882790-738b0964-741a-413b-8faf-cb2bcf0f6541?action=share&source=collection_link&creator=46882790"
+	},
+	"item": [
+		{
+			"name": "Expense CRUD",
+			"item": [
+				{
+					"name": "All Expenses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/expense/get/expenses",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"expense",
+								"get",
+								"expenses"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "All Expenses",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/expense/get/expenses",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"expense",
+										"get",
+										"expenses"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 05 Oct 2025 08:55:42 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"expense\": [\n        {\n            \"description\": \"Fruits\",\n            \"amount\": 1000,\n            \"expenseId\": 1,\n            \"categoryId\": 1,\n            \"categoryName\": \"Grocery\"\n        },\n        {\n            \"description\": \"Snacks\",\n            \"amount\": 500,\n            \"expenseId\": 2,\n            \"categoryId\": 1,\n            \"categoryName\": \"Grocery\"\n        },\n        {\n            \"description\": \"Vegetables\",\n            \"amount\": 1500,\n            \"expenseId\": 3,\n            \"categoryId\": 1,\n            \"categoryName\": \"Grocery\"\n        },\n        {\n            \"description\": \"Food\",\n            \"amount\": 1500,\n            \"expenseId\": 6,\n            \"categoryId\": 2,\n            \"categoryName\": \"Travel\"\n        },\n        {\n            \"description\": \"Hotel\",\n            \"amount\": 5000,\n            \"expenseId\": 4,\n            \"categoryId\": 2,\n            \"categoryName\": \"Travel\"\n        },\n        {\n            \"description\": \"Phone Bill\",\n            \"amount\": 1000,\n            \"expenseId\": 7,\n            \"categoryId\": 3,\n            \"categoryName\": \"Bills\"\n        },\n        {\n            \"description\": \"Electricity Bill\",\n            \"amount\": 2000,\n            \"expenseId\": 8,\n            \"categoryId\": 3,\n            \"categoryName\": \"Bills\"\n        },\n        {\n            \"description\": \"Credit Card\",\n            \"amount\": 5000,\n            \"expenseId\": 9,\n            \"categoryId\": 3,\n            \"categoryName\": \"Bills\"\n        },\n        {\n            \"description\": \"New Year Party\",\n            \"amount\": 1000,\n            \"expenseId\": 10,\n            \"categoryId\": 5,\n            \"categoryName\": \"Party\"\n        },\n        {\n            \"description\": \"Rent\",\n            \"amount\": 10000,\n            \"expenseId\": 11,\n            \"categoryId\": 4,\n            \"categoryName\": \"House Rent\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Add Expense",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \r\n    \"description\": \"party\",\r\n    \"amount\": 5000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/expense/add/expense",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"expense",
+								"add",
+								"expense"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Add Expense",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \r\n    \"description\": \"Rent\",\r\n    \"amount\": 10000,\r\n    \"categoryId\":4\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/expense/add/expense",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"expense",
+										"add",
+										"expense"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 05 Oct 2025 08:47:27 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"description\": \"Rent\",\n    \"amount\": 10000,\n    \"expenseId\": 11,\n    \"categoryId\": 4,\n    \"categoryName\": \"House Rent\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete All Expense",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/expense/delete/allexpenses",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"expense",
+								"delete",
+								"allexpenses"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete All Expense",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/expense/delete/allexpenses",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"expense",
+										"delete",
+										"allexpenses"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain;charset=UTF-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "28"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 05 Oct 2025 09:53:17 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "Expense deleted successfully"
+						}
+					]
+				},
+				{
+					"name": "Update Expense",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n    \"description\": \"party\",\r\n    \"amount\": 10000\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/expense/update/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"expense",
+								"update",
+								"3"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update Expense",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \r\n    \"description\": \"Credit Card\",\r\n    \"amount\": 5000,\r\n    \"categoryId\":3,\r\n    \"categoryName\":\"Bills\"\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/expense/update/9",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"expense",
+										"update",
+										"9"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 05 Oct 2025 08:55:07 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"description\": \"Credit Card\",\n    \"amount\": 5000,\n    \"expenseId\": 9,\n    \"categoryId\": 3,\n    \"categoryName\": \"Bills\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Expense",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/expense/delete/expenseid/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"expense",
+								"delete",
+								"expenseid",
+								"5"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete Expense",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/expense/delete/expenseid/5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"expense",
+										"delete",
+										"expenseid",
+										"5"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 05 Oct 2025 08:55:36 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"description\": \"Fuel\",\n    \"amount\": 1000,\n    \"expenseId\": 5,\n    \"categoryId\": 2,\n    \"categoryName\": \"Travel\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Expense Custom Query",
+			"item": [
+				{
+					"name": "View Expense By CategoryName",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/expense/expense/Bills",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"expense",
+								"expense",
+								"Bills"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "View Expense By CategoryName",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/expense/expense/Bills",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"expense",
+										"expense",
+										"Bills"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 05 Oct 2025 09:47:58 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"expense\": [\n        {\n            \"description\": \"Phone Bill\",\n            \"amount\": 1000,\n            \"expenseId\": 7,\n            \"categoryId\": 3,\n            \"categoryName\": \"Bills\"\n        },\n        {\n            \"description\": \"Electricity Bill\",\n            \"amount\": 2000,\n            \"expenseId\": 8,\n            \"categoryId\": 3,\n            \"categoryName\": \"Bills\"\n        },\n        {\n            \"description\": \"Credit Card\",\n            \"amount\": 5000,\n            \"expenseId\": 9,\n            \"categoryId\": 3,\n            \"categoryName\": \"Bills\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Total Expense",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/expense/expenses/total",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"expense",
+								"expenses",
+								"total"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "View Total Expense",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/expense/expenses/total",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"expense",
+										"expenses",
+										"total"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 05 Oct 2025 09:47:54 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "28500"
+						}
+					]
+				},
+				{
+					"name": "Total Monthly Expense",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/expense/monthwise",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"expense",
+								"monthwise"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "View All Monthly Expense",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/expense/monthwise",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"expense",
+										"monthwise"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 05 Oct 2025 09:47:50 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"OCTOBER\": 28500\n}"
+						}
+					]
+				},
+				{
+					"name": "View Expense List  By Month",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/expense/october",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"expense",
+								"october"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "View Expense By Month",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/expense/october",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"expense",
+										"october"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 05 Oct 2025 09:45:36 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"expense\": [\n        {\n            \"description\": \"Fruits\",\n            \"amount\": 1000,\n            \"expenseId\": 1,\n            \"categoryId\": 1,\n            \"categoryName\": \"Grocery\"\n        },\n        {\n            \"description\": \"Snacks\",\n            \"amount\": 500,\n            \"expenseId\": 2,\n            \"categoryId\": 1,\n            \"categoryName\": \"Grocery\"\n        },\n        {\n            \"description\": \"Vegetables\",\n            \"amount\": 1500,\n            \"expenseId\": 3,\n            \"categoryId\": 1,\n            \"categoryName\": \"Grocery\"\n        },\n        {\n            \"description\": \"Food\",\n            \"amount\": 1500,\n            \"expenseId\": 6,\n            \"categoryId\": 2,\n            \"categoryName\": \"Travel\"\n        },\n        {\n            \"description\": \"Hotel\",\n            \"amount\": 5000,\n            \"expenseId\": 4,\n            \"categoryId\": 2,\n            \"categoryName\": \"Travel\"\n        },\n        {\n            \"description\": \"Phone Bill\",\n            \"amount\": 1000,\n            \"expenseId\": 7,\n            \"categoryId\": 3,\n            \"categoryName\": \"Bills\"\n        },\n        {\n            \"description\": \"Electricity Bill\",\n            \"amount\": 2000,\n            \"expenseId\": 8,\n            \"categoryId\": 3,\n            \"categoryName\": \"Bills\"\n        },\n        {\n            \"description\": \"Credit Card\",\n            \"amount\": 5000,\n            \"expenseId\": 9,\n            \"categoryId\": 3,\n            \"categoryName\": \"Bills\"\n        },\n        {\n            \"description\": \"New Year Party\",\n            \"amount\": 1000,\n            \"expenseId\": 10,\n            \"categoryId\": 5,\n            \"categoryName\": \"Party\"\n        },\n        {\n            \"description\": \"Rent\",\n            \"amount\": 10000,\n            \"expenseId\": 11,\n            \"categoryId\": 4,\n            \"categoryName\": \"House Rent\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "View  Expense List By Category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/expense/expense/category",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"expense",
+								"expense",
+								"category"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "View Expense Categorywise",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/expense/expense/category",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"expense",
+										"expense",
+										"category"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 05 Oct 2025 09:45:19 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Grocery\": [\n        {\n            \"expenseId\": 1,\n            \"amount\": 1000,\n            \"description\": \"Fruits\",\n            \"date\": \"2025-10-05\"\n        },\n        {\n            \"expenseId\": 2,\n            \"amount\": 500,\n            \"description\": \"Snacks\",\n            \"date\": \"2025-10-05\"\n        },\n        {\n            \"expenseId\": 3,\n            \"amount\": 1500,\n            \"description\": \"Vegetables\",\n            \"date\": \"2025-10-05\"\n        }\n    ],\n    \"Travel\": [\n        {\n            \"expenseId\": 6,\n            \"amount\": 1500,\n            \"description\": \"Food\",\n            \"date\": \"2025-10-05\"\n        },\n        {\n            \"expenseId\": 4,\n            \"amount\": 5000,\n            \"description\": \"Hotel\",\n            \"date\": \"2025-10-05\"\n        }\n    ],\n    \"Party\": [\n        {\n            \"expenseId\": 10,\n            \"amount\": 1000,\n            \"description\": \"New Year Party\",\n            \"date\": \"2025-10-05\"\n        }\n    ],\n    \"House Rent\": [\n        {\n            \"expenseId\": 11,\n            \"amount\": 10000,\n            \"description\": \"Rent\",\n            \"date\": \"2025-10-05\"\n        }\n    ],\n    \"Bills\": [\n        {\n            \"expenseId\": 7,\n            \"amount\": 1000,\n            \"description\": \"Phone Bill\",\n            \"date\": \"2025-10-05\"\n        },\n        {\n            \"expenseId\": 8,\n            \"amount\": 2000,\n            \"description\": \"Electricity Bill\",\n            \"date\": \"2025-10-05\"\n        },\n        {\n            \"expenseId\": 9,\n            \"amount\": 5000,\n            \"description\": \"Credit Card\",\n            \"date\": \"2025-10-05\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Total Expense By Category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/expense/category-expenses",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"expense",
+								"category-expenses"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Total Expense By Category",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/expense/category-expenses",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"expense",
+										"category-expenses"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 05 Oct 2025 09:51:43 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"expense\": [\n        {\n            \"description\": null,\n            \"amount\": 8000,\n            \"expenseId\": null,\n            \"categoryId\": null,\n            \"categoryName\": \"Bills\"\n        },\n        {\n            \"description\": null,\n            \"amount\": 1000,\n            \"expenseId\": null,\n            \"categoryId\": null,\n            \"categoryName\": \"Party\"\n        },\n        {\n            \"description\": null,\n            \"amount\": 3000,\n            \"expenseId\": null,\n            \"categoryId\": null,\n            \"categoryName\": \"Grocery\"\n        },\n        {\n            \"description\": null,\n            \"amount\": 6500,\n            \"expenseId\": null,\n            \"categoryId\": null,\n            \"categoryName\": \"Travel\"\n        },\n        {\n            \"description\": null,\n            \"amount\": 10000,\n            \"expenseId\": null,\n            \"categoryId\": null,\n            \"categoryName\": \"House Rent\"\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Category CRUD",
+			"item": [
+				{
+					"name": "Add Category",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/category/add/category",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"category",
+								"add",
+								"category"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Add Category",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"categoryName\": \"Others\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/category/add/category",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"category",
+										"add",
+										"category"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 05 Oct 2025 08:27:10 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"categoryName\": \"Others\",\n    \"categoryId\": 6\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/category/get/categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"category",
+								"get",
+								"categories"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get All Category",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/category/get/categories",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"category",
+										"get",
+										"categories"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 05 Oct 2025 08:54:58 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"category\": [\n        {\n            \"categoryName\": \"Grocery\",\n            \"categoryId\": 1\n        },\n        {\n            \"categoryName\": \"Travel\",\n            \"categoryId\": 2\n        },\n        {\n            \"categoryName\": \"Bills\",\n            \"categoryId\": 3\n        },\n        {\n            \"categoryName\": \"Party\",\n            \"categoryId\": 5\n        },\n        {\n            \"categoryName\": \"House Rent\",\n            \"categoryId\": 4\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Category",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/category/update/category/{categoryId}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"category",
+								"update",
+								"category",
+								"{categoryId}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update Category",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"categoryName\":\"House Rent\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/category/update/category/4",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"category",
+										"update",
+										"category",
+										"4"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 05 Oct 2025 08:27:23 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"categoryName\": \"House Rent\",\n    \"categoryId\": 4\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Category",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/category/delete/id/{categoryId}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"category",
+								"delete",
+								"id",
+								"{categoryId}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete Category",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/category/delete/id/6",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"category",
+										"delete",
+										"id",
+										"6"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 05 Oct 2025 08:27:28 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"categoryName\": \"Others\",\n    \"categoryId\": 6\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete All Category",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/category/delete/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"category",
+								"delete",
+								"all"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete All Category",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/category/delete/all",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"category",
+										"delete",
+										"all"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain;charset=UTF-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "28"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 05 Oct 2025 09:53:48 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "Expense deleted successfully"
+						}
+					]
+				}
+			]
+		}
+	]
+}
