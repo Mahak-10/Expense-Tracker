@@ -62,6 +62,43 @@ A Spring Boot-based Expense Tracker application that allows users to manage and 
 
 
 ---
+## 📸 Project Screenshots
+
+### Add Category
+![Add Category](application/screenshots/Add-category.png)
+
+### Add Expense
+![Add Expense](application/screenshots/Add-expense.png)
+
+### Total Expense
+![Total Expense](application/screenshots/Total-expense.png)
+
+### Update Expense
+![Update Expense](application/screenshots/Update-expense.png)
+
+### View All Category
+![View All Category](application/screenshots/View-all-category.png)
+
+### View All Expense
+![View All Expense](application/screenshots/View-all-expense.png)
+
+### View Total Expense for each category 
+![View Category Expense](application/screenshots/View-category-expense.png)
+
+### View Total Expense for each month
+![View Monthly Expense](application/screenshots/View-category-by-month.png)
+
+### View Expense By Category
+![View Expense By Category](application/screenshots/View-expense-by-category.png)
+
+### View Expense List for each category
+![View Category Expense List](application/screenshots/View-expense-categorywise.png)
+
+### View Expense List for each month
+![View Monthly Expense List](application/screenshots/View-expenseList-by-month.png)
+
+
+
 
 ## API Endpoints
 
