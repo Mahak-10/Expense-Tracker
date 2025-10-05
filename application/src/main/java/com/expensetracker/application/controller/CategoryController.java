@@ -35,6 +35,7 @@ public class CategoryController {
 
     }
 
+    //update catgeory
     @PutMapping("/update/category/{categoryId}")
     public ResponseEntity<CategoryDTO> updateCategory(@Valid @PathVariable Long categoryId, @RequestBody CategoryDTO categoryDTO){
 
@@ -43,6 +44,7 @@ public class CategoryController {
 
     }
 
+    //delete all category
     @DeleteMapping("/delete/all")
     public ResponseEntity<String> deleteAll(){
 
@@ -51,6 +53,7 @@ public class CategoryController {
 
     }
 
+    //delete category
     @DeleteMapping("/delete/id/{categoryId}")
     public ResponseEntity<CategoryDTO> deleteCategory(@PathVariable Long categoryId){
 
