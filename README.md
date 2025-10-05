@@ -86,7 +86,7 @@ A Spring Boot-based Expense Tracker application that allows users to manage and 
 ![View Category Expense](application/screenshots/View-category-expense.png)
 
 ### View Total Expense for each month
-![View Monthly Expense](application/screenshots/View-category-by-month.png)
+![View Monthly Expense](application/screenshots/View-catgory-by-month.png)
 
 ### View Expense By Category
 ![View Expense By Category](application/screenshots/View-expense-by-category.png)
