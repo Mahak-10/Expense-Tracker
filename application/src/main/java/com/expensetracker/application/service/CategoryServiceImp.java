@@ -3,13 +3,9 @@ package com.expensetracker.application.service;
 import com.expensetracker.application.exceptions.APIException;
 import com.expensetracker.application.exceptions.ResourceNotFoundException;
 import com.expensetracker.application.model.Category;
-import com.expensetracker.application.model.Expense;
 import com.expensetracker.application.payload.CategoryDTO;
 import com.expensetracker.application.payload.CategoryResponse;
-import com.expensetracker.application.payload.ExpenseDTO;
-import com.expensetracker.application.payload.ExpenseResponse;
 import com.expensetracker.application.repository.CategoryRepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,61 +17,57 @@ public class CategoryServiceImp implements CategoryService {
     @Autowired
     CategoryRepository categoryRepository;
 
-    @Autowired
-    private ModelMapper modelMapper;
+    private CategoryDTO toCategoryDTO(Category category) {
+        CategoryDTO dto = new CategoryDTO();
+        dto.setCategoryId(category.getCategoryId());
+        dto.setCategoryName(category.getCategoryName());
+        return dto;
+    }
 
     @Override
     public CategoryResponse getAllCategories() {
-        List<CategoryDTO> categoryDTOS= categoryRepository.findAll().stream()
-                .map(category->modelMapper.map(category, CategoryDTO.class))
+        List<CategoryDTO> categoryDTOS = categoryRepository.findAll().stream()
+                .map(this::toCategoryDTO)
                 .toList();
-
-        CategoryResponse categoryResponse= new CategoryResponse();
-        categoryResponse.setCategory(categoryDTOS);
-        return categoryResponse;
+        return new CategoryResponse(categoryDTOS);
     }
 
     @Override
     public CategoryDTO addCategory(CategoryDTO categoryDTO) {
-        Category category=modelMapper.map(categoryDTO,Category.class);
+        Category existingCategory = categoryRepository.findByCategoryNameIgnoreCase(categoryDTO.getCategoryName());
 
-        Category existingCategory=categoryRepository.findByCategoryNameIgnoreCase(category.getCategoryName());
-
-        if(existingCategory!=null){
-            throw new APIException("Category with name  " + existingCategory.getCategoryName()+ " already exists");
+        if (existingCategory != null) {
+            throw new APIException("Category with name " + existingCategory.getCategoryName() + " already exists");
         }
 
+        Category category = new Category();
+        category.setCategoryName(categoryDTO.getCategoryName().trim());
         Category savedCategory = categoryRepository.save(category);
-        return modelMapper.map(savedCategory,CategoryDTO.class);
+        return toCategoryDTO(savedCategory);
     }
 
     @Override
-    public CategoryDTO updateCategory(Long categoryId,CategoryDTO categoryDTO) {
+    public CategoryDTO updateCategory(Long categoryId, CategoryDTO categoryDTO) {
+        Category savedCategory = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new ResourceNotFoundException("Category", "categoryId", categoryId));
 
-        Category updatedCategory=modelMapper.map(categoryDTO,Category.class);
-        Category savedCategory=categoryRepository.findById(categoryId)
-                .orElseThrow(()->new ResourceNotFoundException("Category","categoryId",categoryId));
-
-        savedCategory.setCategoryName(updatedCategory.getCategoryName());
-        savedCategory=categoryRepository.save(savedCategory);
-        return modelMapper.map(savedCategory,CategoryDTO.class);
-
-  
+        savedCategory.setCategoryName(categoryDTO.getCategoryName().trim());
+        savedCategory = categoryRepository.save(savedCategory);
+        return toCategoryDTO(savedCategory);
     }
 
     @Override
     public String deleteAllCategory() {
-        List<Category> savedCategory=categoryRepository.findAll();
-        categoryRepository.deleteAll(savedCategory);
-        return "Expense deleted successfully";
+        categoryRepository.deleteAll();
+        return "Categories deleted successfully";
     }
 
     @Override
     public CategoryDTO deleteCategory(Long categoryId) {
-        Category savedCategory=categoryRepository.findById(categoryId)
-                .orElseThrow(()->new ResourceNotFoundException("Expense","expenseId",categoryId));
+        Category savedCategory = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new ResourceNotFoundException("Category", "categoryId", categoryId));
 
         categoryRepository.delete(savedCategory);
-        return modelMapper.map(savedCategory,CategoryDTO.class);
+        return toCategoryDTO(savedCategory);
     }
 }

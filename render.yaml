@@ -1,0 +1,30 @@
+databases:
+  - name: expense-tracker-db
+    plan: free
+    databaseName: expense_tracker
+    user: expense_user
+
+services:
+  - type: web
+    name: expense-tracker-api
+    runtime: docker
+    plan: free
+    dockerfilePath: ./application/Dockerfile
+    dockerContext: ./application
+    healthCheckPath: /health
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: DATABASE_URL
+        fromDatabase:
+          name: expense-tracker-db
+          property: connectionString
+      - key: DDL_AUTO
+        value: update
+      - key: SHOW_SQL
+        value: "false"
+      - key: CORS_ALLOWED_ORIGINS
+        sync: false
+    buildFilter:
+      paths:
+        - application/**

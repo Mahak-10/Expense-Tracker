@@ -1,19 +1,14 @@
 package com.expensetracker.application.repository;
 
 import com.expensetracker.application.model.Expense;
-import com.expensetracker.application.payload.ExpenseDTO;
-import com.expensetracker.application.payload.ExpenseResponse;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.nio.channels.FileChannel;
 import java.util.List;
-import java.util.Optional;
 
 @Repository
-public interface ExpenseRepository extends JpaRepository<Expense,Long> {
-
+public interface ExpenseRepository extends JpaRepository<Expense, Long> {
 
     List<Expense> findByCategory_CategoryNameIgnoreCase(String categoryName);
 
@@ -28,6 +23,4 @@ public interface ExpenseRepository extends JpaRepository<Expense,Long> {
 
     @Query("SELECT e.category.categoryName, SUM(e.amount) FROM Expense e GROUP BY e.category.categoryName")
     List<Object[]> getCategoryWiseExpenses();
-
-
 }

@@ -1,7 +1,6 @@
 package com.expensetracker.application.controller;
 
 
-import com.expensetracker.application.model.Expense;
 import com.expensetracker.application.payload.ExpenseDTO;
 import com.expensetracker.application.payload.ExpenseResponse;
 import com.expensetracker.application.service.ExpenseService;
@@ -10,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import java.util.Map;
 
@@ -20,61 +20,40 @@ public class ExpenseController {
     @Autowired
     ExpenseService expenseService;
 
+    @PostMapping("/add/expense")
+    public ResponseEntity<ExpenseDTO> addExpense(@Valid @RequestBody ExpenseDTO expenseDTO) {
+        ExpenseDTO status = expenseService.addExpense(expenseDTO);
+        return new ResponseEntity<>(status, HttpStatus.CREATED);
+    }
 
-    //CRUD OPERATIONS
+    @GetMapping("/get/expenses")
+    public ResponseEntity<ExpenseResponse> getExpenses() {
+        ExpenseResponse expenseResponse = expenseService.getExpenses();
+        return new ResponseEntity<>(expenseResponse, HttpStatus.OK);
+    }
 
-      //Add an expense
-     @PostMapping("/add/expense")
-    public ResponseEntity<ExpenseDTO> addExpense(@Valid @RequestBody ExpenseDTO expenseDTO)
-     {
-             ExpenseDTO status=expenseService.addExpense(expenseDTO);
-             return new ResponseEntity<>(status,HttpStatus.OK);
-
-     }
-
-     //get all expense
-     @GetMapping("/get/expenses")
-    public ResponseEntity<ExpenseResponse> getExpenses()
-     {
-            ExpenseResponse expenseResponse= expenseService.getExpenses();
-             return new ResponseEntity<ExpenseResponse>(expenseResponse, HttpStatus.OK);
-     }
-
-     //update an expense
     @PutMapping("/update/{expenseId}")
-    public ResponseEntity<ExpenseDTO> updateExpense(@Valid @PathVariable Long expenseId,@Valid @RequestBody ExpenseDTO expenseDTO)
-    {
-           ExpenseDTO status=expenseService.updateExpense(expenseId, expenseDTO);
-           return new ResponseEntity<>(status, HttpStatus.CREATED);
-
+    public ResponseEntity<ExpenseDTO> updateExpense(@PathVariable Long expenseId, @Valid @RequestBody ExpenseDTO expenseDTO) {
+        ExpenseDTO status = expenseService.updateExpense(expenseId, expenseDTO);
+        return new ResponseEntity<>(status, HttpStatus.OK);
     }
 
-    //delete an expense
     @DeleteMapping("/delete/expenseid/{expenseId}")
-    public ResponseEntity<ExpenseDTO> deleteExpense(@Valid @PathVariable Long expenseId)
-    {
-            ExpenseDTO status=expenseService.deleteExpense(expenseId);
-            return new ResponseEntity<>(status, HttpStatus.OK);
+    public ResponseEntity<ExpenseDTO> deleteExpense(@PathVariable Long expenseId) {
+        ExpenseDTO status = expenseService.deleteExpense(expenseId);
+        return new ResponseEntity<>(status, HttpStatus.OK);
     }
 
-    //delete all expense
     @DeleteMapping("/delete/allexpenses")
-    public ResponseEntity<String> deleteAll()
-    {
-            String status = expenseService.deleteAll();
-            return new ResponseEntity<>(status, HttpStatus.OK);
-
+    public ResponseEntity<String> deleteAll() {
+        String status = expenseService.deleteAll();
+        return new ResponseEntity<>(status, HttpStatus.OK);
     }
 
-
-    //custom queries
-
-
-    //view all expense categorywise
     @GetMapping("/expense/category")
-    public ResponseEntity<Map<String, List<Expense>>> getExpensesByCategory() {
-        Map<String, List<Expense>> status = expenseService.getExpensesGroupedByCategory();
-        return new ResponseEntity<>(status,HttpStatus.OK);
+    public ResponseEntity<Map<String, List<ExpenseDTO>>> getExpensesByCategory() {
+        Map<String, List<ExpenseDTO>> status = expenseService.getExpensesGroupedByCategory();
+        return new ResponseEntity<>(status, HttpStatus.OK);
     }
 
     //view expense by category

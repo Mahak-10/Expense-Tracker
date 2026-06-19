@@ -8,7 +8,6 @@ import com.expensetracker.application.payload.ExpenseDTO;
 import com.expensetracker.application.payload.ExpenseResponse;
 import com.expensetracker.application.repository.CategoryRepository;
 import com.expensetracker.application.repository.ExpenseRepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,9 +27,6 @@ public class ExpenseServiceImp implements ExpenseService {
 
     @Autowired
     CategoryRepository categoryRepository;
-
-    @Autowired
-    private ModelMapper modelMapper;
 
     @Override
     public ExpenseDTO addExpense(ExpenseDTO expenseDTO) {
@@ -52,35 +48,50 @@ public class ExpenseServiceImp implements ExpenseService {
 
 
         Expense savedExpense = expenseRepository.save(expense);
-        return modelMapper.map(savedExpense,ExpenseDTO.class);
+        return toExpenseDTO(savedExpense);
+    }
 
+    private ExpenseDTO toExpenseDTO(Expense expense) {
+        ExpenseDTO dto = new ExpenseDTO();
+        dto.setExpenseId(expense.getExpenseId());
+        dto.setDescription(expense.getDescription());
+        dto.setAmount(expense.getAmount());
+        if (expense.getCategory() != null) {
+            dto.setCategoryId(expense.getCategory().getCategoryId());
+            dto.setCategoryName(expense.getCategory().getCategoryName());
+        }
+        return dto;
     }
 
     @Override
     public ExpenseResponse getExpenses() {
 
-         List<ExpenseDTO> expenseDTOS= expenseRepository.findAll().stream()
-                 .map(expense->modelMapper.map(expense, ExpenseDTO.class))
+         List<ExpenseDTO> expenseDTOS = expenseRepository.findAll().stream()
+                 .map(this::toExpenseDTO)
                  .toList();
 
-         ExpenseResponse expenseResponse= new ExpenseResponse();
-         expenseResponse.setExpense(expenseDTOS);
-         return expenseResponse;
+         return new ExpenseResponse(expenseDTOS);
     }
 
     @Override
     public ExpenseDTO updateExpense(Long expenseId, ExpenseDTO expenseDTO) {
+        Expense savedExpense = expenseRepository.findById(expenseId)
+                .orElseThrow(() -> new ResourceNotFoundException("Expense", "expenseId", expenseId));
 
-              Expense updatedExpense=modelMapper.map(expenseDTO,Expense.class);
-              Expense savedExpense=expenseRepository.findById(expenseId)
-                .orElseThrow(()->new ResourceNotFoundException("Expense","expenseId",expenseId));
+        Long categoryId = expenseDTO.getCategoryId();
+        Category category = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new ResourceNotFoundException("Category", "categoryId", categoryId));
 
-              savedExpense.setAmount(updatedExpense.getAmount());
-              savedExpense.setCategory(updatedExpense.getCategory());
-              savedExpense=expenseRepository.save(savedExpense);
-              return modelMapper.map(savedExpense,ExpenseDTO.class);
-
+        if (expenseDTO.getAmount() == 0 || expenseDTO.getAmount() < 0.1) {
+            throw new APIException("Enter valid amount");
         }
+
+        savedExpense.setDescription(expenseDTO.getDescription());
+        savedExpense.setAmount(expenseDTO.getAmount());
+        savedExpense.setCategory(category);
+        savedExpense = expenseRepository.save(savedExpense);
+        return toExpenseDTO(savedExpense);
+    }
 
 
     @Override
@@ -90,7 +101,7 @@ public class ExpenseServiceImp implements ExpenseService {
                 .orElseThrow(()->new ResourceNotFoundException("Expense","expenseId",expenseId));
 
         expenseRepository.delete(savedExpense);
-        return modelMapper.map(savedExpense,ExpenseDTO.class);
+        return toExpenseDTO(savedExpense);
 
     }
 
@@ -108,7 +119,7 @@ public class ExpenseServiceImp implements ExpenseService {
 
         return expenseRepository.findByCategory_CategoryNameIgnoreCase(categoryName)
                 .stream()
-                .map(expense -> modelMapper.map(expense, ExpenseDTO.class))
+                .map(this::toExpenseDTO)
                 .toList();
 
     }
@@ -139,16 +150,16 @@ public class ExpenseServiceImp implements ExpenseService {
         List<Expense> expenses = expenseRepository.getExpensesByMonth(monthNumber);
 
         return expenses.stream()
-                .map(expense -> modelMapper.map(expense, ExpenseDTO.class))
+                .map(this::toExpenseDTO)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public Map<String, List<Expense>> getExpensesGroupedByCategory() {
-
+    public Map<String, List<ExpenseDTO>> getExpensesGroupedByCategory() {
         List<Expense> allExpenses = expenseRepository.findAll();
         return allExpenses.stream()
-                .collect(Collectors.groupingBy(e -> e.getCategory().getCategoryName()));
+                .map(this::toExpenseDTO)
+                .collect(Collectors.groupingBy(ExpenseDTO::getCategoryName));
     }
 
     @Override

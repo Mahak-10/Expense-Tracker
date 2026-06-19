@@ -1,6 +1,5 @@
 package com.expensetracker.application.controller;
 
-import com.expensetracker.application.model.Category;
 import com.expensetracker.application.payload.CategoryDTO;
 import com.expensetracker.application.payload.CategoryResponse;
 import com.expensetracker.application.service.CategoryService;
@@ -28,7 +27,7 @@ public class CategoryController {
 
     //add a category
     @PostMapping("/add/category")
-    public ResponseEntity<CategoryDTO> addCategory(@RequestBody CategoryDTO categoryDTO){
+    public ResponseEntity<CategoryDTO> addCategory(@Valid @RequestBody CategoryDTO categoryDTO){
 
         CategoryDTO status= categoryService.addCategory(categoryDTO);
         return new ResponseEntity<>(status, HttpStatus.OK);
@@ -37,7 +36,7 @@ public class CategoryController {
 
     //update catgeory
     @PutMapping("/update/category/{categoryId}")
-    public ResponseEntity<CategoryDTO> updateCategory(@Valid @PathVariable Long categoryId, @RequestBody CategoryDTO categoryDTO){
+    public ResponseEntity<CategoryDTO> updateCategory(@PathVariable Long categoryId, @Valid @RequestBody CategoryDTO categoryDTO){
 
         CategoryDTO status= categoryService.updateCategory(categoryId,categoryDTO);
         return new ResponseEntity<>(status, HttpStatus.OK);

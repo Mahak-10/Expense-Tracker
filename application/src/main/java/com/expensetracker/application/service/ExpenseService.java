@@ -1,6 +1,5 @@
 package com.expensetracker.application.service;
 
-import com.expensetracker.application.model.Expense;
 import com.expensetracker.application.payload.ExpenseDTO;
 import com.expensetracker.application.payload.ExpenseResponse;
 
@@ -27,7 +26,7 @@ public interface ExpenseService {
 
     List<ExpenseDTO> getExpenseByMonth(String month);
 
-    Map<String, List<Expense>> getExpensesGroupedByCategory();
+    Map<String, List<ExpenseDTO>> getExpensesGroupedByCategory();
 
     List<ExpenseDTO> getCategoryWiseExpenses();
 }
