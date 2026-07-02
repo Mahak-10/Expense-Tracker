@@ -1,4 +1,5 @@
-# Frontend code directory (ignored)
+# Application Code directories
+application/
 frontend/
 
 # Excluded documentation
