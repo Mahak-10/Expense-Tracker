@@ -1,8 +1,10 @@
-# Application Code directories
-application/
+# Frontend code directory (ignored)
 frontend/
 
-# Local Environment Variables and tools
+# Excluded documentation
+DEPLOYMENT.md
+
+# Local Environment Variables and logs
 .env
 .env.local
 *.log
