@@ -1,11 +1,16 @@
+# Application Code directories
+application/
+frontend/
+
+# Local Environment Variables and tools
 .env
 .env.local
 *.log
+
+# IDE & Editor Settings
 .idea/
-
-# Node
-frontend/node_modules/
-frontend/dist/
-
-# Java
-application/target/
+.vscode/
+.cursor/
+*.iml
+*.ipr
+*.iws
