@@ -1,8 +1,13 @@
 # Expense Tracker
 
-A premium Personal Finance and Expense Tracker application configured to help users track and organize their portfolios efficiently. The stack comprises a robust, multi-user **Spring Boot REST API** backend paired with a modern, fully-responsive **React + Vite** frontend interface. 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20App-brightgreen?style=for-the-badge&logo=vercel)](https://personal-expense-tracker-liart-five.vercel.app)
+
+> 🌐 **Live App**: [https://personal-expense-tracker-liart-five.vercel.app](https://personal-expense-tracker-liart-five.vercel.app)
+
+A premium Personal Finance and Expense Tracker application configured to help users track and organize their portfolios efficiently. The stack comprises a robust, multi-user **Spring Boot REST API** backend paired with a modern, fully-responsive **React + Vite** frontend interface.
 
 ---
+
 
 ## Key Features
 
