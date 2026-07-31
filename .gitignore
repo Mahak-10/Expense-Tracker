@@ -16,3 +16,6 @@ DEPLOYMENT.md
 *.iml
 *.ipr
 *.iws
+
+# Database backup
+local_backup.sql
