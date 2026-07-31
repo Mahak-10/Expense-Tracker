@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { authApi } from '../api/client'
 
 export default function Account() {
-  const currentUsername = localStorage.getItem('username') || 'User'
+  const currentUsername = sessionStorage.getItem('username') || 'User'
   const [username, setUsername] = useState(currentUsername)
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -26,7 +26,7 @@ export default function Account() {
     setLoading(true)
     try {
       const res = await authApi.updateProfile(username.trim(), password)
-      localStorage.setItem('username', res.username)
+      sessionStorage.setItem('username', res.username)
       setMessage({ text: 'Profile updated successfully!', type: 'success' })
       setPassword('')
       setConfirmPassword('')

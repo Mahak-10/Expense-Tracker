@@ -1,7 +1,7 @@
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8080'
 
 async function request(path, options = {}) {
-  const userId = localStorage.getItem('userId')
+  const userId = sessionStorage.getItem('userId')
   const headers = { ...options.headers }
   if (userId) {
     headers['X-User-Id'] = userId

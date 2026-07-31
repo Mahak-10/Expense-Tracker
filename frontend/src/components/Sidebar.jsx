@@ -12,7 +12,7 @@ const NAV_ITEMS = [
 ]
 
 export default function Sidebar({ activePage, onNavigate, open, onClose, onLogout }) {
-  const username = localStorage.getItem('username') || 'User'
+  const username = sessionStorage.getItem('username') || 'User'
 
   return (
     <>

@@ -21,12 +21,12 @@ export default function Login({ onAuthSuccess }) {
     try {
       if (isSignUp) {
         const res = await authApi.register(username.trim(), password)
-        localStorage.setItem('userId', res.userId)
-        localStorage.setItem('username', res.username)
+        sessionStorage.setItem('userId', res.userId)
+        sessionStorage.setItem('username', res.username)
       } else {
         const res = await authApi.login(username.trim(), password)
-        localStorage.setItem('userId', res.userId)
-        localStorage.setItem('username', res.username)
+        sessionStorage.setItem('userId', res.userId)
+        sessionStorage.setItem('username', res.username)
       }
       onAuthSuccess()
     } catch (err) {
@@ -45,14 +45,14 @@ export default function Login({ onAuthSuccess }) {
       // First try to login as demo_user
       try {
         const res = await authApi.login(demoUser, demoPass)
-        localStorage.setItem('userId', res.userId)
-        localStorage.setItem('username', res.username)
+        sessionStorage.setItem('userId', res.userId)
+        sessionStorage.setItem('username', res.username)
         onAuthSuccess()
       } catch (loginErr) {
         // If login fails, attempt to register the demo user (which will auto-seed backend entries)
         const regRes = await authApi.register(demoUser, demoPass)
-        localStorage.setItem('userId', regRes.userId)
-        localStorage.setItem('username', regRes.username)
+        sessionStorage.setItem('userId', regRes.userId)
+        sessionStorage.setItem('username', regRes.username)
         onAuthSuccess()
       }
     } catch (err) {

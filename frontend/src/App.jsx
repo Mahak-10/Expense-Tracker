@@ -11,7 +11,7 @@ import Scheduled from './pages/Scheduled'
 import Account from './pages/Account'
 
 export default function App() {
-  const [authenticated, setAuthenticated] = useState(() => !!localStorage.getItem('userId'))
+  const [authenticated, setAuthenticated] = useState(() => !!sessionStorage.getItem('userId'))
   const [page, setPage] = useState('dashboard')
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
@@ -25,8 +25,8 @@ export default function App() {
   }
 
   const handleLogout = () => {
-    localStorage.removeItem('userId')
-    localStorage.removeItem('username')
+    sessionStorage.removeItem('userId')
+    sessionStorage.removeItem('username')
     setAuthenticated(false)
     setPage('dashboard')
   }
@@ -50,7 +50,13 @@ export default function App() {
           >
             ☰
           </button>
-          <span className="font-semibold text-slate-900">Expense Tracker</span>
+          <span className="flex-1 font-semibold text-slate-900">Expense Tracker</span>
+          <button
+            onClick={handleLogout}
+            className="rounded-lg border border-slate-200 px-3 py-2 text-xs text-slate-600 hover:bg-slate-100 transition"
+          >
+            Sign Out
+          </button>
         </header>
 
         <main className="min-h-screen p-4 sm:p-6 lg:p-8">
