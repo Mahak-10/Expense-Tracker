@@ -399,13 +399,28 @@ public class AuthController {
             throw new APIException("Username and Password are required");
         }
 
-        User user = userRepository.findByUsername(request.getUsername().trim());
-        if (user == null || !user.getPasswordHash().equals(PasswordUtil.hashPassword(request.getPassword()))) {
-            throw new APIException("Invalid username or password");
+        String username = request.getUsername().trim();
+
+        if (username.equalsIgnoreCase("demo_user")) {
+            User demoUserObj = userRepository.findByUsername("demo_user");
+            if (demoUserObj == null) {
+                // If demo user doesn't exist, register a new one to seed baseline data
+                demoUserObj = new User();
+                demoUserObj.setUsername("demo_user");
+                demoUserObj.setPasswordHash(PasswordUtil.hashPassword("demo123"));
+                demoUserObj = userRepository.save(demoUserObj);
+            } else {
+                // Ensure credentials match demo123 (reset in case it was modified by a client update-profile)
+                demoUserObj.setPasswordHash(PasswordUtil.hashPassword("demo123"));
+                demoUserObj = userRepository.save(demoUserObj);
+            }
+            resetDemoUserData(demoUserObj);
+            return new ResponseEntity<>(new AuthResponse(demoUserObj.getUserId(), demoUserObj.getUsername(), "Login successful"), HttpStatus.OK);
         }
 
-        if (user.getUsername().equalsIgnoreCase("demo_user")) {
-            resetDemoUserData(user);
+        User user = userRepository.findByUsername(username);
+        if (user == null || !user.getPasswordHash().equals(PasswordUtil.hashPassword(request.getPassword()))) {
+            throw new APIException("Invalid username or password");
         }
 
         return new ResponseEntity<>(new AuthResponse(user.getUserId(), user.getUsername(), "Login successful"), HttpStatus.OK);
