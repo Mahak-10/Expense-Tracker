@@ -1,15 +1,45 @@
-# Expense Tracker
+<div align="center">
+
+# 💰 Expense Tracker
+
+### Premium Personal Finance & Portfolio Management Platform
+
+**Spring Boot REST API** × **React 19 + Vite**
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20App-brightgreen?style=for-the-badge&logo=vercel)](https://personal-expense-tracker-liart-five.vercel.app)
+[![Java](https://img.shields.io/badge/Java-17-orange?logo=openjdk)](https://openjdk.org/)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.6-brightgreen?logo=springboot)](https://spring.io/projects/spring-boot)
+[![React](https://img.shields.io/badge/React-19.1.0-blue?logo=react)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-6.3.5-646CFF?logo=vite)](https://vitejs.dev/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database-336791?logo=postgresql)](https://www.postgresql.org/)
+[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4.17-06B6D4?logo=tailwindcss)](https://tailwindcss.com/)
+[![Recharts](https://img.shields.io/badge/Recharts-2.15.3-22B5BF)](https://recharts.org/)
 
-> 🌐 **Live App**: [https://personal-expense-tracker-liart-five.vercel.app](https://personal-expense-tracker-liart-five.vercel.app)
+> 🌐 **Live Application**: [https://personal-expense-tracker-liart-five.vercel.app](https://personal-expense-tracker-liart-five.vercel.app)
 
-A premium Personal Finance and Expense Tracker application configured to help users track and organize their portfolios efficiently. The stack comprises a robust, multi-user **Spring Boot REST API** backend paired with a modern, fully-responsive **React + Vite** frontend interface.
+</div>
 
 ---
 
+## 📌 Overview
 
-## Key Features
+A premium Personal Finance and Expense Tracker application configured to help users track and organize their portfolios efficiently. The stack comprises a robust, multi-user **Spring Boot REST API** backend paired with a modern, fully-responsive **React + Vite** frontend interface.
+
+### The Problem
+- **Data Cross-Contamination**: Many basic expense tracking applications mix data across user accounts or rely only on temporary client-side state.
+- **Static Insights**: Lack of dynamic month-over-month trend visualization and category distributions.
+- **Tainted Demo Accounts**: Shared demo accounts get corrupted when testers delete or modify seed data.
+- **Fragmented Scope**: Standard tools track expenses but ignore debts (money owed to me vs. owed to others), recurring utility bills, and brand subscriptions.
+
+### The Solution
+- **Multi-Tenant User Isolation**: Every REST API call is verified against an `X-User-Id` request context header.
+- **Self-Healing Demo Mode**: Any modifications made to `demo_user` are automatically purged and reset back to pristine defaults (**Rs 34,650**) upon re-login.
+- **5-Layer Tracking System**: Unifies Expenses, Savings, Debts, Scheduled Utility Bills, and Brand Subscriptions under one interface.
+- **Rupee (Rs) Localization**: Full currency localization with responsive Recharts visual graphs.
+
+---
+
+## ✨ Key Features
 
 - **Multi-User Security & Auth**
   - Instant user registration, sign-in, and sign-out capabilities.
@@ -34,7 +64,132 @@ A premium Personal Finance and Expense Tracker application configured to help us
 
 ---
 
-## User Interface Screenshots
+## 🏗️ System Architecture
+
+```mermaid
+graph TD
+    Client[React 19 + Vite Frontend] -->|HTTPS Fetch / Axios Client + X-User-Id| Controller[Spring Boot REST Controllers]
+
+    subgraph "Spring Boot Backend Layer"
+        Controller -->|DTO Mappings| Service[Service Layer]
+        Service -->|Business Logic| Repository[Spring Data JPA Repositories]
+        Service -->|Reset Trigger| DemoService[Self-Healing Demo Reset Engine]
+    end
+
+    subgraph "Persistence Layer"
+        Repository -->|SQL Queries| PostgreSQL[(PostgreSQL Database)]
+    end
+```
+
+**Layered backend design:**
+- **Controller Layer** → validates request headers (`X-User-Id`), processes HTTP payloads
+- **Service Layer** → handles business calculations, transactional boundaries (`@Transactional`)
+- **Repository Layer** → Spring Data JPA repository abstractions
+- **DTO Layer** → ModelMapper decouples JPA database entities from JSON client payloads
+- **Demo Engine** → clears state and re-seeds `demo_user` upon every demo login session
+
+---
+
+## 🔄 Control Flow
+
+```mermaid
+sequenceDiagram
+    actor U as User / Recruiter
+    participant FE as React Frontend
+    participant API as Spring Boot REST API
+    participant SVC as Demo Reset Engine
+    participant DB as PostgreSQL Database
+
+    alt Demo Mode Flow
+        U->>FE: Click "Explore Demo Mode"
+        FE->>API: POST /auth/login (demo_user)
+        API->>SVC: Trigger Demo Reset Engine
+        SVC->>DB: Delete mutated records & insert initial Rs 34,650 dataset
+        API-->>FE: Return demo_user session ID
+    else Normal User Login
+        U->>FE: Enter Credentials
+        FE->>API: POST /auth/login
+        API->>DB: Validate credentials
+        API-->>FE: Return userId session
+    end
+
+    U->>FE: View Dashboard / Manage Expenses
+    FE->>API: GET /expense/get/expenses (Header: X-User-Id)
+    API->>DB: Fetch records matching X-User-Id
+    DB-->>API: Return Entities
+    API-->>FE: Return JSON Response
+    FE->>U: Render Recharts Graphs & Summary Cards
+```
+
+---
+
+## 🗂️ Entity Relationship (UML)
+
+```mermaid
+erDiagram
+    USER ||--o{ EXPENSE : logs
+    USER ||--o{ CATEGORY : creates
+    USER ||--o{ SAVING : accumulates
+    USER ||--o{ DEBT : tracks
+    USER ||--o{ SCHEDULED_TRANSACTION : schedules
+    USER ||--o{ SCHEDULED_OPTION : configures
+    USER ||--o{ SUBSCRIPTION : manages
+
+    CATEGORY ||--o{ EXPENSE : categorizes
+
+    USER {
+        Long id PK
+        String username
+        String password
+    }
+    CATEGORY {
+        Long id PK
+        String name
+        String icon
+        String color
+    }
+    EXPENSE {
+        Long id PK
+        String title
+        Double amount
+        LocalDate date
+        Long categoryId FK
+    }
+    SAVING {
+        Long id PK
+        String title
+        Double amount
+        LocalDate date
+    }
+    DEBT {
+        Long id PK
+        String title
+        Double amount
+        LocalDate date
+        String type
+        String status
+    }
+    SCHEDULED_TRANSACTION {
+        Long id PK
+        String title
+        Double amount
+        LocalDate dueDate
+        String category
+        Boolean paid
+    }
+    SUBSCRIPTION {
+        Long id PK
+        String title
+        Double amount
+        String billingCycle
+        LocalDate nextBillingDate
+        String logo
+    }
+```
+
+---
+
+## 📸 User Interface Screenshots
 
 ### Modern Compact Dashboard
 ![Modern Compact Dashboard](assets/dashboard.png)
@@ -47,7 +202,7 @@ A premium Personal Finance and Expense Tracker application configured to help us
 
 ---
 
-## File Structure
+## 📁 File Structure
 
 ```text
 Expense-Tracker/
@@ -89,7 +244,7 @@ Expense-Tracker/
 
 ---
 
-## API Endpoints
+## 📡 API Endpoints
 
 ### Authentication APIs
 | Endpoint | Method | Description |
@@ -149,7 +304,7 @@ Expense-Tracker/
 
 ---
 
-## How to Run
+## 🚀 How to Run
 
 ### 1. Prerequisites
 - **Java Development Kit (JDK 17)**
@@ -197,7 +352,7 @@ Navigate to [http://localhost:5173](http://localhost:5173) in your web browser.
 
 ---
 
-## Technologies Used
+## 🧰 Technologies Used
 
 - **JDK 17 & Spring Boot** (REST Web Services)
 - **Spring Data JPA & PostgreSQL** (Data Persistence)
