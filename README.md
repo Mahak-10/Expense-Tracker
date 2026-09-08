@@ -17,6 +17,8 @@
 
 > 🌐 **Live Application**: [https://personal-expense-tracker-liart-five.vercel.app](https://personal-expense-tracker-liart-five.vercel.app)
 
+**[🎥 Demo Video](#-demo-video) • [🌐 Live Site](https://personal-expense-tracker-liart-five.vercel.app) • [📸 Screenshots](#-user-interface-screenshots) • [📘 API Endpoints](#-api-endpoints)**
+
 </div>
 
 ---
@@ -199,6 +201,14 @@ erDiagram
 
 ### Brand Subscriptions Tracker
 ![Brand Subscriptions Tracker](assets/subscriptions.png)
+
+---
+
+## 🎥 Demo Video
+
+> _Watch the complete application walkthrough showcasing multi-user authentication, self-healing demo mode, financial dashboard analytics, scheduled utility bills, and brand subscriptions._
+
+[![Watch Demo Video](https://img.shields.io/badge/🎥%20Watch%20Demo%20Video-Loom%2FYouTube-red?style=for-the-badge&logo=youtube)](#)
 
 ---
 
