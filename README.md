@@ -66,6 +66,18 @@ A premium Personal Finance and Expense Tracker application configured to help us
 
 ---
 
+## ⚡ Key Challenges & Engineering Outcomes
+
+| Technical Challenge | Engineering Solution & Outcome |
+|:---|:---|
+| 🔐 **Multi-Tenant Data Leaks** | Implemented request header context validation (`X-User-Id`) across all Spring Boot REST controllers, enforcing 100% resource isolation per user session. |
+| 🔄 **Corrupted Demo Environments** | Built an automated `@Transactional` self-healing database engine triggered on every demo login that purges mutations and restores a pristine **Rs 34,650** portfolio. |
+| 🔗 **Foreign Key Violations on Delete** | Engineered audit-safe soft-disassociation unlinking in JPA service layers, preventing deletion of categories or options from breaking historical records. |
+| 📊 **Complex Multi-Category Financial Logs** | Structured dedicated JPA domain models for Expenses, Savings, Debts (*Owed to Me* vs *Owed to Others*), Scheduled Utility Bills, and Brand Subscriptions. |
+| ⚡ **Real-Time Data Aggregation** | Designed optimized JPA aggregation queries for monthly trend calculations and category allocations, rendered seamlessly with dynamic Recharts graphs. |
+
+---
+
 ## 🏗️ System Architecture
 
 ```mermaid
